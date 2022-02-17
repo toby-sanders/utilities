@@ -1,0 +1,17 @@
+function [sigma,sigmas] = determineNoise(I,pad)
+
+% determine the noise level, sigma, for an input image I
+% loop over patches of the image of size "subSize" and determine for each
+% patch using spectrum analysis
+
+% written by Toby Sanders @Lickenbrock Tech.
+% 11/21/2019
+
+if nargin < 2
+    pad = 30;
+end
+subSize = 100;
+
+[d1,d2,d3] = size(I);
+if d3>1, error('input should be 2D image'); end
+I = padEdges(I,pad
