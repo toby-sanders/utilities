@@ -10,6 +10,7 @@ N = numel(I);
 S = sort(I(:));
 minV = S(round(p(1)*N)+1);
 maxV = S(round((1-p(2))*N));
+
 if minV == maxV
     imagesc(I);
 else
