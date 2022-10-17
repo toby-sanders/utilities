@@ -11,7 +11,7 @@ function [tau,out] = getStepLength(A,n)
 % iteration (it may be gauranteed monotone but I'm not sure), so stopping
 % the iterations earlier will under estimate lambda, hence over-estimating
 % tau. In this case the user should scale the output tau to ensure
-% convergence, e.g. newTau = tau/2;
+% convergence, e.g. newTau = tau*gamma, for gamma in (0,1);
 
 % written by Toby Sanders @Lickenbrock Tech.
 % 2/25/2021
@@ -20,9 +20,9 @@ if ~isa(A,'function_handle'), A = @(u,mode) f_handleA(A,u,mode); end
 
 x = randn(n,1); % random vector for the power iterations
 
-% some hard-coded parameter
-iter = 50; % maximum iterations
-tol = 1e-3; % tolerance to break
+% some hard-coded parameters
+iter = 15; % maximum iterations
+tol = 1e-2; % tolerance to break
 
 % run power iterations
 lambda = 0;
@@ -47,4 +47,9 @@ for i = 1:iter
 end
 out.rel_chg = out.rel_chg(1:i);
 out.lambda = out.lambda(1:i);
-tau = 1/lambda;
+
+% a rough upper bound estimate for lambda
+out.lambdaUpperEst = lambda + 2*abs(lambda - lambdap);
+
+% tau = 1/lambda;
+tau = 1/out.lambdaUpperEst;

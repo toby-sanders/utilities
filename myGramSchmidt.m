@@ -4,6 +4,8 @@ function [U,coef] = myGramSchmidt(V)
 % V and store the result into U. Also, compute the coefficients of V in the
 % expansion of the ONB, U
 
+% written by Toby Sanders @ Magnetic Insight
+% 9-13-22
 
 [N,dim] = size(V);
 U = zeros(N,dim);
