@@ -38,6 +38,9 @@ if ~exist('map','var')
     map = 'gray';
 elseif ~ischar(map)
     map = 'gray';
+elseif strcmp(map,'steel')
+    blueSteel;
+    map = cmap;
 elseif ~sum(strcmp(map,{'jet','gray','hot','bone','cool','hsv','spring',...
         'summer','autumn','winter','copper','pink','lines','parula'}))
     map = 'gray';
